@@ -53,13 +53,17 @@ Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) an
 ## :checkered_flag: Starting ##
 
 ```bash
-# Clone this project
+# 1. Clone this project
 $ git clone https://github.com/Leandro-Bertoluzzi/thingsboard-server
 
-# Access
+# 2. Access the project folder
 $ cd thingsboard-server
 
-# Run the project with logs
+# 3. Copy and configure the .env files according to your setup
+cp rabbitmq.env.dist rabbitmq.env
+cp thingsboard.env.dist thingsboard.env
+
+# 4. Run the project with logs
 $ docker compose up -d
 $ docker compose logs -f thingsboard
 

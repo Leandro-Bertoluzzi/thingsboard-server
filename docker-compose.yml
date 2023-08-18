@@ -1,0 +1,32 @@
+version: '3.0'
+services:
+  thingsboard:
+    restart: always
+    container_name: "thingsboard"
+    image: "thingsboard/tb-postgres"
+    depends_on:
+      - rabbitmq3
+    env_file: ./thingsboard.env
+    ports:
+      - "8080:9090"
+      - "1883:1883"
+      - "7070:7070"
+      - "5683-5688:5683-5688/udp"
+    volumes:
+      - thingsboard-data:/data
+      - thingsboard-logs:/var/log/thingsboard
+
+  rabbitmq3:
+      restart: always
+      container_name: "rabbitmq"
+      image: rabbitmq:3.8-management-alpine
+      env_file: ./rabbitmq.env
+      ports:
+          # AMQP protocol port
+          - '5672:5672'
+          # HTTP management UI
+          - '15672:15672'
+
+volumes:
+  thingsboard-data:
+  thingsboard-logs:
